@@ -1,11 +1,8 @@
-import { ADD_TODO, TOGGLE_TODO } from '../actions/actions';
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER } from "../actions/actions"
 
-// Initial TodosState
-// Initialy todos is empty
-let initialState = [];
+let initialState = []
 
 export const todosReducer = (state=initialState, action) => {
-    
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -13,7 +10,7 @@ export const todosReducer = (state=initialState, action) => {
                 {
                     id: action.payload.id,
                     text: action.payload.text,
-                    completed: false
+                    complete: false
                 }
             ]
         case TOGGLE_TODO:
@@ -22,13 +19,13 @@ export const todosReducer = (state=initialState, action) => {
                 ?
                 {
                     ...todo,
-                    completed: !todo.completed
+                    complete : !todo.complete
                 }
                 :
                 todo
             )
-    
         default:
-            return state;
+            //* return state cause can be reuse in others reducers */
+            return state
     }
 }
